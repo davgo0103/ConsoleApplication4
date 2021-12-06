@@ -37,6 +37,39 @@ void MergeSort(int a[], int b[], int l, int r)
 
     }
 }
+
+int partition(int a[], int l, int r) {
+    int i, j, temp;
+    for (i = l + 1, j = r;;) {
+        while (a[i] < a[l] && i <= r)
+            i++;
+        while (a[j] > a[l])
+            j--;
+        if (i >= j)
+            break;
+        temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+    temp = a[l];
+    a[l] = a[j];
+    a[j] = temp;
+    return j;
+}
+
+void QuickSort(int a[], int l, int r) {
+    int p;
+    if (l < r)
+    {
+        p = partition(a, l, r);
+        for (int i = 0; i < 9; i++)
+            cout << a[i] << " ";
+        cout << endl;
+        QuickSort(a, l, p - 1);
+        QuickSort(a, p + 1, r);
+    }
+}
+
 int a[] = { 9,12,17,21,37 };
 int b[] = { 3,11,20,55,67,71,89 };
 int c[12] = { 0 };
@@ -45,10 +78,10 @@ int b1[9] = { 0 };
 
 int main()
 {
-    MergeSort(a1, b1, 0, 8);
-    for (int i = 0; i < 9; i++)
-        cout << a1[i] << " ";
-    cout << endl;
+    QuickSort(a1, 0, 8);
+
+    //MergeSort(a1, b1, 0, 8);
+    
     std::cout << "Hello World!\n";
 }
 
